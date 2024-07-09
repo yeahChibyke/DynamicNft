@@ -7,8 +7,8 @@ import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
 
 contract DeployDynamicPfp is Script {
     function run() external returns (DynamicPfp) {
-        string memory ogSvg = vm.readFile("./images/og.svg");
-        string memory punkSvg = vm.readFile("./images/punk.svg");
+        string memory ogSvg = vm.readFile("./img/og.svg");
+        string memory punkSvg = vm.readFile("./img/punk.svg");
         vm.startBroadcast();
         DynamicPfp dynamicPfp = new DynamicPfp(svgToImageURI(ogSvg), svgToImageURI(punkSvg));
         vm.stopBroadcast();
