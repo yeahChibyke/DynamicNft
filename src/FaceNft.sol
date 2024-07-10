@@ -5,19 +5,26 @@ import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
 
 contract FaceNft is ERC721 {
+    // >------< Errors >-----<
+    error FaceNft__UnAuthorized();
+
+    // >------< Variables >-----<
     uint256 private s_tokenCounter;
     string private s_nerdFaceSvgImageUri;
     string private s_ninjaFaceSvgImageUri;
     string private s_smileFaceSvgImageUri;
 
+    // >------< Enums >-----<
     enum Face {
         NERD,
         NINJA,
         SMILE
     }
 
+    // >------< Mapping >-----<
     mapping(uint256 tokenId => Face) private s_tokenIdToFace;
 
+    // >------< Constructor >-----<
     constructor(
         string memory nerdFaceSvgImageUri,
         string memory ninjaFaceSvgImageUri,
@@ -29,10 +36,26 @@ contract FaceNft is ERC721 {
         s_smileFaceSvgImageUri = smileFaceSvgImageUri;
     }
 
+    // >------< Functions >-----<
     function mintNft() public {
         _safeMint(msg.sender, s_tokenCounter);
         s_tokenIdToFace[s_tokenCounter] = Face.NERD;
         s_tokenCounter++;
+    }
+
+    function flipFace(uint256 tokenId) public {
+        // fetch owner of the token
+        // require only Nft owner can flip face
+        if (getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender) {
+            revert FaceNft__UnAuthorized();
+        }
+        if (s_tokenIdToFace[tokenId] == Face.NERD) {
+            s_tokenIdToFace[tokenId] = Face.NINJA;
+        } else if (s_tokenIdToFace[tokenId] == Face.NINJA) {
+            s_tokenIdToFace[tokenId] = Face.SMILE;
+        } else if (s_tokenIdToFace[tokenId] == Face.SMILE) {
+            s_tokenIdToFace[tokenId] = Face.NERD;
+        }
     }
 
     function _baseURI() internal pure override returns (string memory) {
