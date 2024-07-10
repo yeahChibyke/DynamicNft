@@ -43,17 +43,45 @@ contract FaceNft is ERC721 {
         s_tokenCounter++;
     }
 
-    function flipFace(uint256 tokenId) public {
+    function flipFaceToNerd(uint256 tokenId) public {
+        // require only Nft owner can flip face
+        if (getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender) {
+            revert FaceNft__UnAuthorized();
+        }
+        if (s_tokenIdToFace[tokenId] == Face.NINJA) {
+            s_tokenIdToFace[tokenId] = Face.NERD;
+        } else if (s_tokenIdToFace[tokenId] == Face.SMILE) {
+            s_tokenIdToFace[tokenId] = Face.NERD;
+        } else {
+            s_tokenIdToFace[tokenId] = Face.NERD;
+        }
+    }
+
+    function flipFaceToNinja(uint256 tokenId) public {
         // require only Nft owner can flip face
         if (getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender) {
             revert FaceNft__UnAuthorized();
         }
         if (s_tokenIdToFace[tokenId] == Face.NERD) {
             s_tokenIdToFace[tokenId] = Face.NINJA;
+        } else if (s_tokenIdToFace[tokenId] == Face.SMILE) {
+            s_tokenIdToFace[tokenId] = Face.NINJA;
+        } else {
+            s_tokenIdToFace[tokenId] = Face.NINJA;
+        }
+    }
+
+    function flipFaceToSmile(uint256 tokenId) public {
+        // require only Nft owner can flip face
+        if (getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender) {
+            revert FaceNft__UnAuthorized();
+        }
+        if (s_tokenIdToFace[tokenId] == Face.NERD) {
+            s_tokenIdToFace[tokenId] = Face.SMILE;
         } else if (s_tokenIdToFace[tokenId] == Face.NINJA) {
             s_tokenIdToFace[tokenId] = Face.SMILE;
-        } else if (s_tokenIdToFace[tokenId] == Face.SMILE) {
-            s_tokenIdToFace[tokenId] = Face.NERD;
+        } else {
+            s_tokenIdToFace[tokenId] = Face.SMILE;
         }
     }
 

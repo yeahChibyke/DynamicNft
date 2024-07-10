@@ -33,6 +33,8 @@ contract TestFaceNft is Test {
         console2.log(faceNft.tokenURI(0));
     }
 
+    function testFlipFace() public view {}
+
     // >-----DeployScript Tests-----<
     function testConvertSvgToUri() public view {
         string memory expectedUri =
