@@ -41,6 +41,13 @@ contract TestFaceNft is Test {
         assert(keccak256(abi.encodePacked(faceNft.tokenURI(0))) == keccak256(abi.encodePacked(NERD_FACE_TOKEN_URI)));
     }
 
+    function testCanMintAndHaveBalance() public {
+        vm.prank(Chibyke);
+        faceNft.mintNft();
+
+        assert(faceNft.balanceOf(Chibyke) == 1);
+    }
+
     function testFlipFaceToNerd() public {
         vm.startPrank(Chibyke);
         faceNft.mintNft();
