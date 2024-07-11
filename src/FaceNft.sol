@@ -29,7 +29,7 @@ contract FaceNft is ERC721 {
         string memory nerdFaceSvgImageUri,
         string memory ninjaFaceSvgImageUri,
         string memory smileFaceSvgImageUri
-    ) ERC721("FaceNft", "FNFT") {
+    ) ERC721("Face NFT", "FNFT") {
         s_tokenCounter = 0;
         s_nerdFaceSvgImageUri = nerdFaceSvgImageUri;
         s_ninjaFaceSvgImageUri = ninjaFaceSvgImageUri;
