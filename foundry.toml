@@ -5,13 +5,11 @@ libs = ["lib"]
 
 ffi = true
 
-fs_permissions = [{ access = "read", path = "./img/"}]
-
-# fs_permissions = [
-#     { access = "read", path = "./images/" },
-#     { access = "read", path = "./broadcast" },
-#     { access = "read", path = "./baseConverted" },
-# ]
+fs_permissions = [
+    { access = "read", path = "./img/" },
+    { access = "read", path = "./broadcast" },
+    { access = "read", path = "./baseConverted" },
+]
 
 remappings = ["@openzeppelin/contracts=lib/openzeppelin-contracts/contracts"]
 

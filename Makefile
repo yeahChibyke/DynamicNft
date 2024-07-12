@@ -6,4 +6,9 @@ deploy-sepolia:
 test-sepolia:
 	forge test --rpc-url $(ETHEREUM_SEPOLIA_RPC_URL)
 
-	
+coverage-sepolia:
+	forge coverage --rpc-url $(ETHEREUM_SEPOLIA_RPC_URL)
+
+mint-sepolia:
+	forge script script/Interactions.s.sol --rpc-url $(ETHEREUM_SEPOLIA_RPC_URL) --account key --verify --etherscan-api-key $(ETHERSCAN_API_KEY) --broadcast -vvvv
+

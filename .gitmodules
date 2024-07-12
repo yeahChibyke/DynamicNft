@@ -4,3 +4,6 @@
 [submodule "lib/openzeppelin-contracts"]
 	path = lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "lib/Foundry-devops"]
+	path = lib/Foundry-devops
+	url = https://github.com/Cyfrin/Foundry-devops
