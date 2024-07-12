@@ -44,7 +44,7 @@ contract FaceNft is ERC721 {
     }
 
     function flipFaceToNerd(uint256 tokenId) public {
-        // require only Nft owner can flip face
+        // require only NFT owner can flip face
         if (getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender) {
             revert FaceNft__UnAuthorized();
         }
