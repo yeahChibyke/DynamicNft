@@ -301,3 +301,11 @@
             }
         }
     ```
+
+# 15/07/2024 1.1
+
+Deployed new contract on EThereum Sepolia with the following details:
+  - Contract Address: 0x186A83894d8d6BaDB6fed08Fd4e534FC07227aFD
+  - Chain: Ethereum Sepolia
+  - Verification Status: `OK`
+  - Minting Status: Suucessful in terminal, not loading on [Testnets OpenSea](https://testnets.opensea.io/) 
