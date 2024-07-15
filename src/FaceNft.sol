@@ -23,6 +23,8 @@ contract FaceNft is ERC721 {
 
     // >------< Mapping >-----<
     mapping(uint256 tokenId => Face) private s_tokenIdToFace;
+    mapping(address => bool) private s_addressToHasFace; // added refactor
+    mapping (address => uint256) private s_addressToAmountOfFaceOwned; // added refactor
 
     // >------< Constructor >-----<
     constructor(
@@ -120,5 +122,26 @@ contract FaceNft is ERC721 {
                 )
             )
         );
+    }
+
+    // >-----< Getter Functions >-----<
+    function getTokenCounter() public view returns(uint256) {
+        return s_tokenCounter;
+    }
+
+    function getNerdFaceSvg() public view returns(string memory) {
+        return s_nerdFaceSvgImageUri;
+    }
+
+    function getNinjaFaceSvg() public view returns(string memory) {
+        return s_ninjaFaceSvgImageUri;
+    }
+
+    function getSmileFaceSvg() public view returns(string memory) {
+        return s_smileFaceSvgImageUri;
+    }
+
+    function getAmountOfFaceOwned(address _holder) public view returns(uint256) {
+        return balanceOf(_holder);
     }
 }
