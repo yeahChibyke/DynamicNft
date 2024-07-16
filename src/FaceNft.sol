@@ -2,11 +2,13 @@
 pragma solidity >= 0.8.0;
 
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
 
-contract FaceNft is ERC721 {
+contract FaceNft is ERC721, Ownable {
     // >------< Errors >-----<
     error FaceNft__UnAuthorized();
+    error ERC721Metadata__URI_QueryFor_NonExistentToken();
 
     // >------< Variables >-----<
     uint256 private s_tokenCounter;
@@ -23,15 +25,13 @@ contract FaceNft is ERC721 {
 
     // >------< Mapping >-----<
     mapping(uint256 tokenId => Face) private s_tokenIdToFace;
-    mapping(address => bool) private s_addressToHasFace; // added refactor
-    mapping (address => uint256) private s_addressToAmountOfFaceOwned; // added refactor
 
     // >------< Constructor >-----<
     constructor(
         string memory nerdFaceSvgImageUri,
         string memory ninjaFaceSvgImageUri,
         string memory smileFaceSvgImageUri
-    ) ERC721("Face NFT", "FNFT") {
+    ) ERC721("Face NFT", "FNFT") Ownable(msg.sender) {
         s_tokenCounter = 0;
         s_nerdFaceSvgImageUri = nerdFaceSvgImageUri;
         s_ninjaFaceSvgImageUri = ninjaFaceSvgImageUri;
@@ -91,14 +91,15 @@ contract FaceNft is ERC721 {
         return "data:application/json;base64,";
     }
 
-    function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        string memory imageURI;
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        if (ownerOf(tokenId) == address(0)) {
+            revert ERC721Metadata__URI_QueryFor_NonExistentToken();
+        }
+        string memory imageURI = s_nerdFaceSvgImageUri;
 
-        if (s_tokenIdToFace[tokenId] == Face.NERD) {
-            imageURI = s_nerdFaceSvgImageUri;
-        } else if (s_tokenIdToFace[tokenId] == Face.NINJA) {
+        if (s_tokenIdToFace[tokenId] == Face.NINJA) {
             imageURI = s_ninjaFaceSvgImageUri;
-        } else {
+        } else if (s_tokenIdToFace[tokenId] == Face.SMILE) {
             imageURI = s_smileFaceSvgImageUri;
         }
 
@@ -125,23 +126,23 @@ contract FaceNft is ERC721 {
     }
 
     // >-----< Getter Functions >-----<
-    function getTokenCounter() public view returns(uint256) {
+    function getTokenCounter() public view returns (uint256) {
         return s_tokenCounter;
     }
 
-    function getNerdFaceSvg() public view returns(string memory) {
+    function getNerdFaceSvg() public view returns (string memory) {
         return s_nerdFaceSvgImageUri;
     }
 
-    function getNinjaFaceSvg() public view returns(string memory) {
+    function getNinjaFaceSvg() public view returns (string memory) {
         return s_ninjaFaceSvgImageUri;
     }
 
-    function getSmileFaceSvg() public view returns(string memory) {
+    function getSmileFaceSvg() public view returns (string memory) {
         return s_smileFaceSvgImageUri;
     }
 
-    function getAmountOfFaceOwned(address _holder) public view returns(uint256) {
+    function getAmountOfFaceOwned(address _holder) public view returns (uint256) {
         return balanceOf(_holder);
     }
 }
