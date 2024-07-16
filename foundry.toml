@@ -8,7 +8,7 @@ ffi = true
 fs_permissions = [
     { access = "read", path = "./img" },
     { access = "read", path = "./broadcast" },
-    { access = "read", path = "./baseConverted" },
+    # { access = "read", path = "./baseConverted" }, 
 ]
 
 remappings = ["@openzeppelin/contracts=lib/openzeppelin-contracts/contracts"]

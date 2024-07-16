@@ -26,6 +26,9 @@ contract FaceNft is ERC721, Ownable {
     // >------< Mapping >-----<
     mapping(uint256 tokenId => Face) private s_tokenIdToFace;
 
+    // >-----< Events >-----<
+    event FaceNFTMinted(uint256 indexed tokenId);
+
     // >------< Constructor >-----<
     constructor(
         string memory nerdFaceSvgImageUri,
@@ -40,9 +43,12 @@ contract FaceNft is ERC721, Ownable {
 
     // >------< Functions >-----<
     function mintNft() public {
-        _safeMint(msg.sender, s_tokenCounter);
-        s_tokenIdToFace[s_tokenCounter] = Face.NERD;
+        uint256 tokenCounter = s_tokenCounter;
+        _safeMint(msg.sender, tokenCounter);
+        // s_tokenIdToFace[s_tokenCounter] = Face.NERD;
         s_tokenCounter++;
+
+        emit FaceNFTMinted(tokenCounter);
     }
 
     function flipFaceToNerd(uint256 tokenId) public {
