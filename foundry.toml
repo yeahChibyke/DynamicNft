@@ -6,7 +6,7 @@ libs = ["lib"]
 ffi = true
 
 fs_permissions = [
-    { access = "read", path = "./img/" },
+    { access = "read", path = "./img" },
     { access = "read", path = "./broadcast" },
     { access = "read", path = "./baseConverted" },
 ]

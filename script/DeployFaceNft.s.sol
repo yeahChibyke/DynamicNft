@@ -7,9 +7,9 @@ import {Base64} from "@openzeppelin/contracts/utils/Base64.sol";
 
 contract DeployFaceNft is Script {
     function run() external returns (FaceNft) {
-        string memory nerdFaceSvg = vm.readFile("../img/nerdFace.svg");
-        string memory ninjaFaceSvg = vm.readFile("../img/ninjaFace.svg");
-        string memory smileFaceSvg = vm.readFile("../img/smileFace.svg");
+        string memory nerdFaceSvg = vm.readFile("./img/nerdFace.svg");
+        string memory ninjaFaceSvg = vm.readFile("./img/ninjaFace.svg");
+        string memory smileFaceSvg = vm.readFile("./img/smileFace.svg");
 
         vm.startBroadcast();
         FaceNft faceNft =
