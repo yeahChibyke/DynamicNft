@@ -45,7 +45,7 @@ contract FaceNft is ERC721, Ownable {
     function mintNft() public {
         uint256 tokenCounter = s_tokenCounter;
         _safeMint(msg.sender, tokenCounter);
-        // s_tokenIdToFace[s_tokenCounter] = Face.NERD;
+        s_tokenIdToFace[s_tokenCounter] = Face.NERD;
         s_tokenCounter++;
 
         emit FaceNFTMinted(tokenCounter);
@@ -113,15 +113,12 @@ contract FaceNft is ERC721, Ownable {
             abi.encodePacked(
                 _baseURI(),
                 Base64.encode(
-                    bytes(
+                    bytes( // bytes casting actually unnecessary as 'abi.encodePacked()' returns a bytes
                         abi.encodePacked(
                             '{"name":"',
-                            name(),
-                            '", "description":"Face NFT that represents the personality of the owner.", ',
-                            '"attributes": [{',
-                            '"trait_type": "Type", "value": "Svg Image"}, ',
-                            '{"trait_type": "Personality", "value": "100%"}, ',
-                            '"image":"',
+                            name(), // You can add whatever name here
+                            '", "description":"Face NFT that reflects the personality of the owner, 100% on Chain!", ',
+                            '"attributes": [{"trait_type": "personality", "value": 100}], "image":"',
                             imageURI,
                             '"}'
                         )
