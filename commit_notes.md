@@ -309,3 +309,10 @@ Deployed new contract on EThereum Sepolia with the following details:
   - Chain: Ethereum Sepolia
   - Verification Status: `OK`
   - Minting Status: Suucessful in terminal, not loading on [Testnets OpenSea](https://testnets.opensea.io/) 
+
+# 17/07/2024
+
+- Finally fixed the issue with NFT not loading on OpenSea.
+- P.S. I used `cast` instead of the `Interactions.s.sol` script.
+- I also used `cast` to `flip()`, but I did not see any change in OpenSea. There must be a way to see `flip()` changes, will come back to this.
+- But at this point, I can see this project is *done*
