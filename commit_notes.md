@@ -316,3 +316,9 @@ Deployed new contract on EThereum Sepolia with the following details:
 - P.S. I used `cast` instead of the `Interactions.s.sol` script.
 - I also used `cast` to `flip()`, but I did not see any change in OpenSea. There must be a way to see `flip()` changes, will come back to this.
 - But at this point, I can see this project is *done*
+
+# 17/07/2024 1.1
+
+Check the following links for svg inspirations for upcoming NFT projects
+-   https://www.svgrepo.com/collection/circle-avatar-vectors/
+-   https://www.svgrepo.com/collection/emoji-face-emoji-vectors/
